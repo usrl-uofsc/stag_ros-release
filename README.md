@@ -1,3 +1,26 @@
+## stag_ros (noetic) - 0.3.6-4
+
+The packages in the `stag_ros` repository were released into the `noetic` distro by running `/usr/bin/bloom-release --rosdistro noetic stag_ros` on `Mon, 14 Dec 2020 19:50:26 -0000`
+
+The `stag_ros` package was released.
+
+Version of package(s) in repository `stag_ros`:
+
+- upstream repository: https://github.com/usrl-uofsc/stag_ros.git
+- release repository: https://github.com/usrl-uofsc/stag_ros-release.git
+- rosdistro version: `0.3.6-3`
+- old version: `0.3.6-3`
+- new version: `0.3.6-4`
+
+Versions of tools used:
+
+- bloom version: `0.10.0`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## stag_ros (noetic) - 0.3.6-3
 
 The packages in the `stag_ros` repository were released into the `noetic` distro by running `/usr/bin/bloom-release stag_ros --rosdistro noetic` on `Wed, 02 Dec 2020 20:04:49 -0000`
