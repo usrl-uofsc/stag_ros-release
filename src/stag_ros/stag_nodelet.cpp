@@ -41,6 +41,7 @@ SOFTWARE.
 #include <tf/transform_broadcaster.h>
 #include <geometry_msgs/PoseStamped.h>
 
+#include <stdexcept>
 #include <iostream>
 #include <future>
 #include <stag_ros/common.hpp>
@@ -55,6 +56,14 @@ void StagNodelet::onInit() {
   // Load Parameters
   loadParameters(nh_lcl);
 
+  // Initialize Stag
+  try {
+    stag = new Stag(stag_library, error_correction, false);
+  } catch (const std::invalid_argument &e) {
+    std::cout << e.what() << std::endl;
+    exit(-1);
+  }
+
   // Set Subscribers
   imageSub = imageT.subscribe(
       image_topic, 1, &StagNodelet::imageCallback, this,
@@ -67,9 +76,6 @@ void StagNodelet::onInit() {
     imageDebugPub = imageT.advertise("stag_ros/image_markers", 1);
   bundlePub = nh.advertise<geometry_msgs::PoseStamped>("stag_ros/bundles", 1);
   markersPub = nh.advertise<geometry_msgs::PoseStamped>("stag_ros/markers", 1);
-
-  // Initialize Stag
-  stag = new Stag(stag_library, error_correction, false);
 
   // Initialize camera info
   got_camera_info = false;
@@ -94,8 +100,7 @@ void StagNodelet::loadParameters(const ros::NodeHandle &nh) {
   nh.param("publish_tf", publish_tf, false);
   nh.param("tag_tf_prefix", tag_tf_prefix, std::string("STag_"));
 
-  loadTagsBundles(nh,"tags","bundles",tags,bundles);
-
+  loadTagsBundles(nh, "tags", "bundles", tags, bundles);
 }
 
 bool StagNodelet::getTagIndex(const int id, int &tag_index) {
@@ -150,8 +155,9 @@ void StagNodelet::imageCallback(const sensor_msgs::ImageConstPtr &msg) {
     // For each marker in the list
     if (markers.size() > 0) {
       // Create markers msg
-      std::vector<cv::Mat> tag_pose(tags.size(), cv::Mat(3, 4, CV_64F));
-      std::vector<cv::Mat> bundle_pose(bundles.size(), cv::Mat(3, 4, CV_64F));
+      std::vector<cv::Mat> tag_pose(tags.size(), cv::Mat::zeros(3, 4, CV_64F));
+      std::vector<cv::Mat> bundle_pose(bundles.size(),
+                                       cv::Mat::zeros(3, 4, CV_64F));
       std::vector<std::vector<cv::Point2d>> bundle_image(bundles.size());
       std::vector<std::vector<cv::Point3d>> bundle_world(bundles.size());
 
@@ -172,8 +178,10 @@ void StagNodelet::imageCallback(const sensor_msgs::ImageConstPtr &msg) {
             tag_world[ci + 1] = tags[tag_index].corners[ci];
           }
 
-          Common::solvePnpSingle(tag_image, tag_world, tag_pose[tag_index],
+          cv::Mat marker_pose = cv::Mat::zeros(3, 4, CV_64F);
+          Common::solvePnpSingle(tag_image, tag_world, marker_pose,
                                  cameraMatrix, distortionMat);
+          tag_pose[tag_index] = marker_pose;
 
         } else if (getBundleIndex(markers[i].id, bundle_index, tag_index)) {
           bundle_image[bundle_index].push_back(markers[i].center);
@@ -187,10 +195,14 @@ void StagNodelet::imageCallback(const sensor_msgs::ImageConstPtr &msg) {
           }
         }
       }
+
       for (size_t bi = 0; bi < bundles.size(); ++bi) {
-        if (bundle_image[bi].size() > 0)
-          Common::solvePnpBundle(bundle_image[bi], bundle_world[bi],
-                                 bundle_pose[bi], cameraMatrix, distortionMat);
+        if (bundle_image[bi].size() > 0) {
+          cv::Mat b_pose = cv::Mat::zeros(3, 4, CV_64F);
+          Common::solvePnpBundle(bundle_image[bi], bundle_world[bi], b_pose,
+                                 cameraMatrix, distortionMat);
+          bundle_pose[bi] = b_pose;
+        }
       }
 
       for (size_t bi = 0; bi < bundles.size(); ++bi) {
