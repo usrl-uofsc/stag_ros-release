@@ -1,3 +1,26 @@
+## stag_ros (kinetic) - 0.1.1-6
+
+The packages in the `stag_ros` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --rosdistro kinetic --track kinetic stag_ros --edit` on `Tue, 15 Dec 2020 17:35:35 -0000`
+
+The `stag_ros` package was released.
+
+Version of package(s) in repository `stag_ros`:
+
+- upstream repository: https://github.com/usrl-uofsc/stag_ros.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `0.1.1-5`
+- new version: `0.1.1-6`
+
+Versions of tools used:
+
+- bloom version: `0.10.0`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## stag_ros (kinetic) - 0.1.1-5
 
 The packages in the `stag_ros` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release --rosdistro kinetic --track kinetic stag_ros --edit` on `Tue, 15 Dec 2020 05:53:16 -0000`
