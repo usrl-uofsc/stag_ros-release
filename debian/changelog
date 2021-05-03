@@ -1,0 +1,25 @@
+ros-kinetic-stag-ros (0.1.2-1xenial) xenial; urgency=high
+
+  * Merged noetic into kinetic
+  * Merge branch 'kinetic-devel' of github.com:usrl-uofsc/stag_ros into kinetic-devel
+  * Fixed GHANGELOG.rst
+  * Merged from noetic
+  * Update README.md
+  * 0.1.1
+  * Added Changelog
+  * Merge branch 'noetic-devel' into kinetic-devel
+  * Merge branch 'noetic-devel' into kinetic-devel
+  * Merge branch 'noetic-devel' into kinetic-devel
+  * set initial kinetic version
+  * Contributors: Brennan Cain, MikeK4y
+
+ -- Brennan Cain <bscain@email.sc.edu>  Mon, 03 May 2021 04:00:00 -0000
+
+ros-kinetic-stag-ros (0.1.1-1xenial) xenial; urgency=high
+
+  * Initial Release
+  * Contributors: Brennan Cain, Burak Benligiray, MikeK4y, bbenligiray
+
+ -- Brennan Cain <bscain@email.sc.edu>  Mon, 14 Dec 2020 05:00:00 -0000
+
+
