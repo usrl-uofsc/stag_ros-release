@@ -1,1 +1,1 @@
-{"trim": "", "base": "383385c", "trimbase": "", "parent": "debian/noetic/stag_ros", "previous": "ffff600"}
+{"base": "315b28f", "parent": "debian/noetic/stag_ros", "previous": "6f6fc0f", "trim": "", "trimbase": ""}
