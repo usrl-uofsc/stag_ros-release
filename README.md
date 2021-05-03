@@ -1,3 +1,26 @@
+## stag_ros (melodic) - 0.2.2-1
+
+The packages in the `stag_ros` repository were released into the `melodic` distro by running `/usr/bin/bloom-release stag_ros --rosdistro melodic` on `Mon, 03 May 2021 19:07:19 -0000`
+
+The `stag_ros` package was released.
+
+Version of package(s) in repository `stag_ros`:
+
+- upstream repository: https://github.com/usrl-uofsc/stag_ros.git
+- release repository: https://github.com/usrl-uofsc/stag_ros-release.git
+- rosdistro version: `0.2.1-1`
+- old version: `0.2.1-1`
+- new version: `0.2.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.1`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## stag_ros (kinetic) - 0.1.2-1
 
 The packages in the `stag_ros` repository were released into the `kinetic` distro by running `/usr/bin/bloom-release stag_ros --rosdistro kinetic` on `Mon, 03 May 2021 18:59:53 -0000`
